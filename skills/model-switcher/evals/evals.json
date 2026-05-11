@@ -1,0 +1,23 @@
+{
+  "skill_name": "model-switcher",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "切换到kimi，我想试试月之暗面的模型效果怎么样",
+      "expected_output": "Successfully switch model to kimi and update settings.json",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I want to use GLM-4 for some reasoning tasks, can you switch to it?",
+      "expected_output": "Successfully switch model to glm4 and update settings.json",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "换个快点的模型，现在这个有点慢",
+      "expected_output": "Suggest fast model options and allow user to choose",
+      "files": []
+    }
+  ]
+}

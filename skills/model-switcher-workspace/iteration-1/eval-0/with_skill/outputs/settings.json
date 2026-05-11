@@ -1,0 +1,39 @@
+{
+  "autoUpdatesChannel": "latest",
+  "theme": "light",
+  "effortLevel": "high",
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:8082",
+    "ANTHROPIC_AUTH_TOKEN": "freecc"
+  },
+  "model": "kimi",
+  "availableModels": [
+    "sonnet",
+    "opus",
+    "haiku",
+    "kimi",
+    "glm4",
+    "glm4-9b",
+    "baichuan",
+    "yi-large",
+    "qwen-turbo",
+    "qwen-plus",
+    "qwen-max",
+    "deepseek",
+    "step1",
+    "yi-34b"
+  ],
+  "modelOverrides": {
+    "kimi": "anthropic/open_router/moonshotai/kimi-k2.6",
+    "glm4": "anthropic/open_router/zhipuai/glm-4-plus",
+    "glm4-9b": "anthropic/open_router/zhipuai/glm-4-9b-chat",
+    "baichuan": "anthropic/open_router/baichuan-inc/baichuan2-turbo",
+    "yi-large": "anthropic/open_router/01-ai/yi-large",
+    "qwen-turbo": "anthropic/open_router/alibaba/qwen-turbo",
+    "qwen-plus": "anthropic/open_router/alibaba/qwen-plus",
+    "qwen-max": "anthropic/open_router/alibaba/qwen-max",
+    "deepseek": "anthropic/open_router/deepseek/deepseek-chat",
+    "step1": "anthropic/open_router/stepfun/step-1-200k",
+    "yi-34b": "anthropic/open_router/lingyi/yi-34b-chat"
+  }
+}

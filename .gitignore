@@ -1,0 +1,43 @@
+# 敏感信息 - 不上传到 GitHub
+# API Keys and Credentials
+.env
+.env.local
+*.key
+*.pem
+settings.json.bak*
+auth.json
+
+# 系统文件
+.DS_Store
+.obsidian/
+__pycache__/
+*.pyc
+node_modules/
+.cache/
+*.log
+
+# 临时文件
+.tmp/
+*.swp
+*.swo
+*~
+
+# 个人数据
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+cache/
+plugins/cache/
+memories/
+.codex-global-state.json
+
+# 不需要同步的配置
+logs_2.sqlite*
+state_*.sqlite
+models_cache.json
+history.jsonl
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace

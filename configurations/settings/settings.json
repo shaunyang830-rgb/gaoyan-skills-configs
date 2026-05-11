@@ -1,0 +1,185 @@
+{
+  "autoUpdatesChannel": "latest",
+  "theme": "light",
+  "effortLevel": "xhigh",
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:4000",
+    "ANTHROPIC_AUTH_TOKEN": "dummy",
+    "ANTHROPIC_API_KEY": "",
+    "OPENROUTER_API_KEY": "YOUR_OPENROUTER_API_KEY_HERE",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-4.7",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4.6",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4.5",
+    "ANTHROPIC_SMALL_FAST_MODEL": "claude-haiku-4.5",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION": "kimi-k2.6",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION_NAME": "Kimi K2.6",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION": "Moonshot Kimi K2.6 via LiteLLM"
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Glob",
+      "Grep",
+      "LS",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git checkout*)",
+      "Bash(git branch*)",
+      "Bash(git stash*)",
+      "Bash(git fetch*)",
+      "Bash(git pull*)",
+      "Bash(git clone*)",
+      "Bash(python*)",
+      "Bash(python3*)",
+      "Bash(pip*)",
+      "Bash(pip3*)",
+      "Bash(uv*)",
+      "Bash(node*)",
+      "Bash(npm*)",
+      "Bash(npx*)",
+      "Bash(pnpm*)",
+      "Bash(bun*)",
+      "Bash(yarn*)",
+      "Bash(litellm*)",
+      "Bash(curl*)",
+      "Bash(wget*)",
+      "Bash(cat*)",
+      "Bash(head*)",
+      "Bash(tail*)",
+      "Bash(ls*)",
+      "Bash(find*)",
+      "Bash(grep*)",
+      "Bash(echo*)",
+      "Bash(printf*)",
+      "Bash(wc*)",
+      "Bash(sort*)",
+      "Bash(uniq*)",
+      "Bash(awk*)",
+      "Bash(sed*)",
+      "Bash(jq*)",
+      "Bash(cp*)",
+      "Bash(mv*)",
+      "Bash(mkdir*)",
+      "Bash(touch*)",
+      "Bash(pandoc*)",
+      "Bash(puppeteer*)",
+      "Bash(markitdown*)",
+      "Bash(nohup*)",
+      "Bash(kill*)",
+      "Bash(ps*)",
+      "Bash(which*)",
+      "Bash(export*)",
+      "Bash(source*)",
+      "Bash(chmod +x*)"
+    ],
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(rm -r*)",
+      "Bash(sudo*)",
+      "Bash(git push*)",
+      "Bash(git rebase*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean -f*)",
+      "Bash(npm publish*)",
+      "Bash(pip install --user --system*)",
+      "Bash(chmod 777*)",
+      "Bash(curl*|*sh)",
+      "Bash(wget*|*sh)",
+      "Bash(:(){:|:&};:)"
+    ],
+    "defaultMode": "acceptEdits"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/smart-install.js\"",
+            "timeout": 300
+          },
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" start; for i in 1 2 3 4 5 6 7 8; do curl -sf http://localhost:37777/health >/dev/null 2>&1 && break; sleep 1; done; curl -sf http://localhost:37777/health >/dev/null 2>&1 || exit 1; echo '{\"continue\":true,\"suppressOutput\":true}'",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; for i in 1 2 3 4 5 6 7 8; do curl -sf http://localhost:37777/health >/dev/null 2>&1 && break; sleep 1; done; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" hook claude-code context",
+            "timeout": 60
+          },
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.local/bin:$PATH\"; if ! curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1; then mkdir -p \"$HOME/.claude/litellm/logs\"; nohup litellm --config \"$HOME/.claude/litellm/config.yaml\" --port 4000 > \"$HOME/.claude/litellm/logs/litellm.log\" 2>&1 & for i in 1 2 3 4 5 6 7 8 9 10; do curl -sf http://127.0.0.1:4000/health/liveliness >/dev/null 2>&1 && break; sleep 1; done; fi; echo '{\"continue\":true,\"suppressOutput\":true}'",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" hook claude-code session-init",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" hook claude-code observation",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "_R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" hook claude-code file-context",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" hook claude-code summarize",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/versions/node/v$(ls \\\"$HOME/.nvm/versions/node\\\" 2>/dev/null | sed 's/^v//' | sort -t. -k1,1n -k2,2n -k3,3n | tail -1)/bin:$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH\"; _R=\"$HOME/.claude/plugins/cache/thedotmack/claude-mem/12.1.0\"; node \"$_R/scripts/bun-runner.js\" \"$_R/scripts/worker-service.cjs\" hook claude-code session-complete",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "model": "haiku"
+}
